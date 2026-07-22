@@ -41,6 +41,7 @@ class VetController {
 		this.vetRepository = vetRepository;
 	}
 
+	// @lucigent: PC-12
 	@GetMapping("/vets.html")
 	public String showVetList(@RequestParam(defaultValue = "1") int page, Model model) {
 		Page<Vet> paginated = findPaginated(page);
@@ -62,6 +63,7 @@ class VetController {
 		return vetRepository.findAll(pageable);
 	}
 
+	// @lucigent: PC-13
 	@GetMapping({ "/vets" })
 	public @ResponseBody Vets showResourcesVetList() {
 		// Here we are returning an object of type 'Vets' rather than a collection of Vet

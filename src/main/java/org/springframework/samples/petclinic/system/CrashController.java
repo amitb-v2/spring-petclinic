@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 class CrashController {
 
+	// @lucigent: PC-18
 	@GetMapping("/oups")
 	public String triggerException() {
 		throw new RuntimeException(

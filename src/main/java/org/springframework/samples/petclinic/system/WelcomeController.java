@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 class WelcomeController {
 
+	// @lucigent: PC-16
 	@GetMapping("/")
 	public String welcome() {
 		return "welcome";
