@@ -71,4 +71,13 @@ class VetController {
 		return vets;
 	}
 
+	/**
+	 * KG incremental-ingest test: a new endpoint added on the kg-ingest-test branch so
+	 * the incremental diff produces a new method + route node in the graph.
+	 */
+	@GetMapping({ "/vets/count" })
+	public @ResponseBody int countVets() {
+		return (int) this.vetRepository.count();
+	}
+
 }
