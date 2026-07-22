@@ -58,6 +58,7 @@ class PetController {
 		this.types = types;
 	}
 
+	// @lucigent: PC-11
 	@ModelAttribute("types")
 	public Collection<PetType> populatePetTypes() {
 		return this.types.findPetTypes();
@@ -103,6 +104,7 @@ class PetController {
 		return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 	}
 
+	// @lucigent: PC-9
 	@PostMapping("/pets/new")
 	public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result,
 			RedirectAttributes redirectAttributes) {
@@ -131,6 +133,7 @@ class PetController {
 		return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 	}
 
+	// @lucigent: PC-10
 	@PostMapping("/pets/{petId}/edit")
 	public String processUpdateForm(Owner owner, @Valid Pet pet, BindingResult result,
 			RedirectAttributes redirectAttributes) {
