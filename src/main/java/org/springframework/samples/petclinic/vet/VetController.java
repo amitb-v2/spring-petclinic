@@ -41,6 +41,7 @@ class VetController {
 		this.vetRepository = vetRepository;
 	}
 
+	// @lucigent: PC-5, PC-6/AC-1
 	@GetMapping("/vets.html")
 	public String showVetList(@RequestParam(defaultValue = "1") int page, Model model) {
 		Page<Vet> paginated = findPaginated(page);
@@ -62,6 +63,7 @@ class VetController {
 		return vetRepository.findAll(pageable);
 	}
 
+	// @lucigent: PC-5
 	@GetMapping({ "/vets" })
 	public @ResponseBody Vets showResourcesVetList() {
 		// Here we are returning an object of type 'Vets' rather than a collection of Vet
@@ -75,6 +77,7 @@ class VetController {
 	 * KG incremental-ingest test: a new endpoint added on the kg-ingest-test branch so
 	 * the incremental diff produces a new method + route node in the graph.
 	 */
+	// @lucigent: PC-6
 	@GetMapping({ "/vets/count" })
 	public @ResponseBody int countVets() {
 		return (int) this.vetRepository.count();
