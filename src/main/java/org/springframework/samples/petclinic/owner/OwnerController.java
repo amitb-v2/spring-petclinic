@@ -39,6 +39,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
+ * @lucigent: PC-5
  * @author Juergen Hoeller
  * @author Ken Krebs
  * @author Arjen Poutsma
@@ -175,6 +176,10 @@ class OwnerController {
 				"Owner not found with id: " + ownerId + ". Please ensure the ID is correct "));
 		mav.addObject(owner);
 		return mav;
+	}
+
+	public void someDummyMethod(WebDataBinder dataBinder) {
+		dataBinder.setDisallowedFields("id", "*.id");
 	}
 
 }
