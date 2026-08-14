@@ -20,6 +20,8 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Repository class for <code>Owner</code> domain objects. All method names are compliant
@@ -58,5 +60,19 @@ public interface OwnerRepository extends JpaRepository<Owner, Integer> {
 	 * input for id)
 	 */
 	Optional<Owner> findById(Integer id);
+
+	/**
+	 * Retrieve {@link Owner}s whose last name, city, or telephone matches the given
+	 * term, or who own a pet whose name matches it. Backs the combined
+	 * owner-and-pet lookup on the find-owners screen.
+	 * @param term free-text search term
+	 * @return a page of matching {@link Owner}s
+	 */
+	@Query("SELECT DISTINCT o FROM Owner o LEFT JOIN o.pets p WHERE "
+			+ "LOWER(o.lastName) LIKE LOWER(CONCAT(:term, '%')) OR "
+			+ "LOWER(o.city) LIKE LOWER(CONCAT(:term, '%')) OR "
+			+ "o.telephone LIKE CONCAT(:term, '%') OR "
+			+ "LOWER(p.name) LIKE LOWER(CONCAT(:term, '%'))")
+	Page<Owner> searchByOwnerOrPetDetails(@Param("term") String term, Pageable pageable);
 
 }
