@@ -51,5 +51,6 @@ CREATE TABLE IF NOT EXISTS visits (
   pet_id INT(4) UNSIGNED,
   visit_date DATE,
   description VARCHAR(255),
+  weight DECIMAL(5,1),
   FOREIGN KEY (pet_id) REFERENCES pets(id)
 ) engine=InnoDB;

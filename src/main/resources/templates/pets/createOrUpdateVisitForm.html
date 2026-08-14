@@ -31,6 +31,7 @@
     <div class="form-group has-feedback">
       <input th:replace="~{fragments/inputField :: input ('Date', 'date', 'date')}" />
       <input th:replace="~{fragments/inputField :: input ('Description', 'description', 'text')}" />
+      <input th:replace="~{fragments/inputField :: input ('Weight (kg)', 'weight', 'text')}" />
     </div>
 
     <div class="form-group">
@@ -47,10 +48,12 @@
     <tr>
       <th th:text="#{date}">Date</th>
       <th th:text="#{description}">Description</th>
+      <th>Weight (kg)</th>
     </tr>
     <tr th:if="${!visit['new']}" th:each="visit : ${pet.visits}">
       <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"></td>
       <td th:text=" ${visit.description}"></td>
+      <td th:text="${visit.weight}"></td>
     </tr>
   </table>
 

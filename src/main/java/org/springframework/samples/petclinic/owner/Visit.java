@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.owner;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,6 +24,8 @@ import org.springframework.samples.petclinic.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 
 /**
@@ -41,6 +44,16 @@ public class Visit extends BaseEntity {
 
 	@NotBlank
 	private String description;
+
+	/**
+	 * The pet's weight in kilograms at the time of the visit. Optional — visits recorded
+	 * before weight was captured, and visits where it simply wasn't taken, leave this
+	 * null.
+	 */
+	@Column(name = "weight", precision = 5, scale = 1)
+	@DecimalMin(value = "0.0", inclusive = false)
+	@DecimalMax(value = "200.0")
+	private BigDecimal weight;
 
 	/**
 	 * Creates a new instance of Visit for tomorrow
@@ -63,6 +76,14 @@ public class Visit extends BaseEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public BigDecimal getWeight() {
+		return this.weight;
+	}
+
+	public void setWeight(BigDecimal weight) {
+		this.weight = weight;
 	}
 
 }
