@@ -17,6 +17,7 @@
         <th th:text="#{birthDate}">Birth Date</th>
         <th th:text="#{type}">Type</th>
         <th th:text="#{owner}">Owner</th>
+        <th>Allergy</th>
       </tr>
     </thead>
     <tr>
@@ -24,6 +25,7 @@
       <td th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}"></td>
       <td th:text="${pet.type}"></td>
       <td th:text="${owner?.firstName + ' ' + owner?.lastName}"></td>
+      <td th:text="${pet.allergy}"></td>
     </tr>
   </table>
 

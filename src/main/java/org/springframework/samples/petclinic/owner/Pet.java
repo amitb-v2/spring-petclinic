@@ -32,6 +32,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 /**
  * Simple business object representing a pet.
@@ -53,6 +54,14 @@ public class Pet extends NamedEntity {
 	@JoinColumn(name = "type_id")
 	private PetType type;
 
+	/**
+	 * A medication or food this pet reacts to. Optional — most pets have none — and
+	 * surfaced on the visit form so it is in front of the vet during future visits.
+	 */
+	@Column(name = "allergy")
+	@Size(max = 255)
+	private String allergy;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "pet_id")
 	@OrderBy("date ASC")
@@ -72,6 +81,14 @@ public class Pet extends NamedEntity {
 
 	public void setType(PetType type) {
 		this.type = type;
+	}
+
+	public String getAllergy() {
+		return this.allergy;
+	}
+
+	public void setAllergy(String allergy) {
+		this.allergy = allergy;
 	}
 
 	public Collection<Visit> getVisits() {
