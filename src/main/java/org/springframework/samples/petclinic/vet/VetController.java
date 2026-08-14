@@ -23,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -82,4 +83,21 @@ class VetController {
 		return (int) this.vetRepository.count();
 	}
 
+
+	/**
+	 * Returns the veterinarians whose specialties include the given name, for the
+	 * specialty filter on the vets listing screen.
+	 */
+	@GetMapping("/vets/specialty/{name}")
+	public @ResponseBody Vets showVetsBySpecialty(@PathVariable("name") String name) {
+		Vets result = new Vets();
+		for (Vet vet : this.vetRepository.findAll()) {
+			boolean matches = vet.getSpecialties().stream()
+					.anyMatch(s -> s.getName().equalsIgnoreCase(name));
+			if (matches) {
+				result.getVetList().add(vet);
+			}
+		}
+		return result;
+	}
 }
